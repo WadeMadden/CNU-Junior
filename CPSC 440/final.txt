@@ -1,0 +1,14 @@
+Final Exam sat 11
+Scholar QA closed book m choice matching
+midterm topics:
+	rdbms,1nf-3nf Essay Design
+	eerd completeness/disjointness,attribute/relations/inheritance
+	outer joins- full,left,right -> sql to data
+	sql keywords
+	subqueries
+	eerd diagrams
+	transactions - rollback - comitted
+		atomic-all or nothing-completly fails or completly succeeds
+	mandatory optional relationships
+	to many/to one in fk constraints(unique/not null)
+	design tables/columns/pk and fk given erd

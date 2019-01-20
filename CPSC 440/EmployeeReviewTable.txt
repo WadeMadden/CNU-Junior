@@ -1,0 +1,58 @@
+-- Incomplete. Review needs a composite PK.
+
+drop table if exists employee cascade; -- Forced Delete!
+drop table if exists review cascade; -- Forced Delete!
+drop table if exists employeeSkills cascade;
+drop table if exists skills cascade;
+
+create table employee (
+    empId int primary key,
+    empFirstName text,
+    empMiddleInitial char(1),
+    empLastName text,
+    empDepartment text
+);
+
+insert into employee(empId, empFirstName, empMiddleInitial, empLastName, empDepartment)
+values
+(123456, 'Michael', 'C', 'Johnson', 'ENGR'),
+(123457, 'Angela', 'V', 'Johnson', 'ENGR'),
+(123458, 'Ellissa', null, 'Johnson', 'MRKN')
+;
+
+select * from employee;
+
+create table review (
+    revDate date,
+    revDescription text,
+    empId int references employee(empId),
+    constraint review_composite_pk primary key (empId, revDate)
+);
+
+insert into review(revDate, revDescription, empId) values
+('Jan 23 2018', 'Mr. Johnson was not boring today.', 123456),
+('Jan 18 2018', 'Mr. Johnson was somewhat boring today.', 123456)
+;
+
+select * from review;
+
+create table skills(
+    skillName text primary key
+);
+
+create table employeeSkills (
+    empId int,
+    skillName text,
+    constraint ES_FK1 foreign key (empId) references employee(empId),
+    constraint ES_FK2 foreign key (skillName) references skills(skillName),
+    constraint ES_PK primary key (empId, skillName)
+);
+
+insert into skills (skillName) values
+('Teaching'), ('Grading')
+;
+
+insert into employeeSkills (empId, skillName) values
+(123456, 'Teaching')
+;
+select * from employeeSkills;
